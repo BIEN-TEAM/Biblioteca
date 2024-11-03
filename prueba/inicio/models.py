@@ -1,11 +1,29 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-class Grupos (models.Model):
-    id_grupo = models.IntegerField(max_length=10000, verbose_name="ID", primary_key=True)
+# Apartado Editado por Jazzani
+class Libros(models.Model):
+    id_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField en lugar de IntegerField
+    ISBN = models.CharField(max_length=100, verbose_name="ISBN: ")
+    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
+    autor = models.CharField(max_length=100, verbose_name="Autor: ")
+    año = models.DateField(verbose_name="Año: ")  # Quitar max_length en DateField
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+
+    class Meta:
+        verbose_name = "Libro"
+        verbose_name_plural = "Libros"
+        ordering = ["-created"]
+    
+    def __str__(self):
+        return self.nombre
+
+
+class Grupos(models.Model):
+    id_grupo = models.AutoField(verbose_name="ID", primary_key=True)  # Usar AutoField en lugar de IntegerField
     nombre = models.CharField(max_length=100, verbose_name="Nombre del grupo")
     privilegios = models.CharField(max_length=100, verbose_name="Privilegios")
-
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
         verbose_name = "Grupo"
@@ -13,43 +31,17 @@ class Grupos (models.Model):
         ordering = ["-created"]
 
     def __str__(self):
-        return self.privilegios
-    
-
-class Reseñas(models.Model):
-    id_reseña = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
-    calificacion = models.IntegerField(max_length=1000, verbose_name="Calificación: ")
-    comentario = models.TextField(verbose_name="Comentario: ")
-
-    class Meta:
-        verbose_name = "Reseña"
-        verbose_name_plural = "Reseñas"
-        ordering = ["-created"]
-
-    def __str__(self):
-        return self.comentario
-    
-class Libros(models.Model):
-    id_libro = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
-    ISBN = models.CharField(max_length=100, verbose_name="ISBN: ")
-    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
-    autor = models.CharField(max_length=100, verbose_name="Autor: ")
-    año = models.DateField(max_length=100, verbose_name="Año: ")
-
-    class Meta:
-        verbose_name = "Libro"
-        verbose_name_plural = "Libros"
-        ordering = ["-created"]
-
-    def __str__(self):
         return self.nombre
-    
+
+
+# Apartado Editado por Jazzani
 class Usuarios(models.Model):
-    id_usuario = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
+    id_usuario = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
     id_grupo = models.ForeignKey(Grupos, on_delete=models.CASCADE, verbose_name="Grupo: ")
-    nombre = models.CharField(max_length=100, verbose_name="Nombre: "),
+    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")  # Quitar la coma
     email = models.EmailField(max_length=100, verbose_name="Correo electrónico: ")
     contraseña = models.CharField(max_length=100, verbose_name="Contraseña: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
         verbose_name = "Usuario"
@@ -59,9 +51,26 @@ class Usuarios(models.Model):
     def __str__(self):
         return self.nombre
 
+
+class Reseñas(models.Model):
+    id_reseña = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    calificacion = models.IntegerField(verbose_name="Calificación: ")  # Quitar max_length
+    comentario = models.TextField(verbose_name="Comentario: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+
+    class Meta:
+        verbose_name = "Reseña"
+        verbose_name_plural = "Reseñas"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.comentario
+
+
 class Categorias(models.Model):
-    id_categoria = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
+    id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
     nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
         verbose_name = "Categoría"
@@ -73,9 +82,10 @@ class Categorias(models.Model):
 
 
 class Libros_Categorias(models.Model):
-    id_categoria = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
-    id_libro= models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="Libros: ")
-    id_libro_categoria=models.ForeignKey(Categorias, on_delete=models.CASCADE, verbose_name="ID:")
+    id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="Libros: ")
+    id_libro_categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE, verbose_name="ID:")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
         verbose_name = "Libros Categorías"
@@ -83,13 +93,15 @@ class Libros_Categorias(models.Model):
         ordering = ["-created"]
 
     def __str__(self):
-        return self.id_categoria 
+        return str(self.id_categoria)  # Convertir a string para evitar errores
+
 
 class Descargas(models.Model):
-    id_descarga = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
+    id_descarga = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
     id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
     id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
     fecha = models.DateField(auto_now_add=True, verbose_name="Fecha de descarga: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
         verbose_name = "Descarga"
@@ -97,11 +109,20 @@ class Descargas(models.Model):
         ordering = ["-created"]
 
     def __str__(self):
-        return self.id_descarga
+        return str(self.id_descarga)
+
+
 class Ver_Libros(models.Model):
-    id_ver_libro = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
+    id_ver_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
     id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
     id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
     fecha = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
+    class Meta:
+        verbose_name = "Ver Libro"
+        verbose_name_plural = "Ver Libros"
+        ordering = ["-created"]
 
+    def __str__(self):
+        return str(self.id_ver_libro)
