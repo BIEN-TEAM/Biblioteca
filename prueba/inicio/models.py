@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
+<<<<<<< HEAD
 # Apartado Editado por Jazzani
 class Libros(models.Model):
     id_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField en lugar de IntegerField
@@ -21,6 +22,11 @@ class Libros(models.Model):
 
 class Grupos(models.Model):
     id_grupo = models.AutoField(verbose_name="ID", primary_key=True)  # Usar AutoField en lugar de IntegerField
+=======
+#Modelos hechos por Erick
+class Grupos (models.Model):
+    id_grupo = models.IntegerField(max_length=10000, verbose_name="ID", primary_key=True)
+>>>>>>> 4da0943c5ff91ff7ee74f5a2e91bef102b3b2b1c
     nombre = models.CharField(max_length=100, verbose_name="Nombre del grupo")
     privilegios = models.CharField(max_length=100, verbose_name="Privilegios")
     created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
@@ -31,6 +37,7 @@ class Grupos(models.Model):
         ordering = ["-created"]
 
     def __str__(self):
+<<<<<<< HEAD
         return self.nombre
 
 
@@ -57,6 +64,15 @@ class Reseñas(models.Model):
     calificacion = models.IntegerField(verbose_name="Calificación: ")  # Quitar max_length
     comentario = models.TextField(verbose_name="Comentario: ")
     created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+=======
+        return self.privilegios
+    
+
+class Reseñas(models.Model):
+    id_reseña = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
+    calificacion = models.IntegerField(max_length=1000, verbose_name="Calificación: ")
+    comentario = models.TextField(verbose_name="Comentario: ")
+>>>>>>> 4da0943c5ff91ff7ee74f5a2e91bef102b3b2b1c
 
     class Meta:
         verbose_name = "Reseña"
@@ -65,6 +81,7 @@ class Reseñas(models.Model):
 
     def __str__(self):
         return self.comentario
+<<<<<<< HEAD
 
 
 class Categorias(models.Model):
@@ -126,3 +143,6 @@ class Ver_Libros(models.Model):
 
     def __str__(self):
         return str(self.id_ver_libro)
+=======
+  
+>>>>>>> 4da0943c5ff91ff7ee74f5a2e91bef102b3b2b1c
