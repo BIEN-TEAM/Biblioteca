@@ -93,6 +93,33 @@ class Libros_Categorias(models.Model):
     def _str_(self):
         return str(self.id_categoria)
 
+class Descargas(models.Model):
+    id_descarga = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
+    id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
+    fecha = models.DateField(auto_now_add=True, verbose_name="Fecha de descarga: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+
+    class Meta:
+        verbose_name = "Descarga"
+        verbose_name_plural = "Descargas"
+        ordering = ["-created"]
+
+    def _str_(self):
+        return str(self.id_descarga)
 
 
+class Ver_Libros(models.Model):
+    id_ver_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
+    id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
+    fecha = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
+    class Meta:
+        verbose_name = "Ver Libro"
+        verbose_name_plural = "Ver Libros"
+        ordering = ["-created"]
+
+    def _str_(self):
+        return str(self.id_ver_libro)
