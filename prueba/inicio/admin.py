@@ -50,16 +50,21 @@ class AdministrarCategoria(admin.ModelAdmin):
 
 admin.site.register(Categorias, AdministrarCategoria)
 
-class AdministrarLibros_Categoria(admin.ModelAdmin):
-    list_display = ('id_categoria', 'id_libro')
-    search_fields = ('id_categoria', 'id_libro_categoria')  
+class AdministrarLibrosCategoria(admin.ModelAdmin):
+    from django.contrib import admin
+from .models import Libros_Categorias
+
+class AdministrarLibros_Categorias(admin.ModelAdmin):
+    list_display = ('id_libro_categoria', 'id_libro', 'id_categoria')
+    search_fields = ('id_libro_categoria', 'id_libro__nombre', 'id_categoria__nombre')
     date_hierarchy = 'created'
-    readonly_fields = ('created', 'id_categoria')
-    list_per_page=5
-    list_display_links=('id_libro_categoria','id_libro')
+    readonly_fields = ('created', 'id_libro_categoria')
+    list_per_page = 5
+    list_display_links = ('id_libro_categoria', 'id_libro', 'id_categoria')
+
+admin.site.register(Libros_Categorias, AdministrarLibros_Categorias)
 
 
-admin.site.register(Libros_Categorias, AdministrarLibros_Categoria)
 
 class AdministrarDescargas(admin.ModelAdmin):
     list_display = ('id_descarga','id_libro')
@@ -73,11 +78,11 @@ class AdministrarDescargas(admin.ModelAdmin):
 admin.site.register(Descargas, AdministrarDescargas)
 
 class AdministrarVer_Libros(admin.ModelAdmin):
-    list_display = ('id_ver_libro','id_usuario')
-    search_fields = ('id_ver_libro','id_usuario')
+    list_display = ('id_ver_libro', 'id_usuario')
+    search_fields = ('id_ver_libro', 'id_usuario')
     date_hierarchy = 'created'
-    readonly_fields=5
-    list_per_page=('id_ver_libro','id_usuario')
+    readonly_fields = ('id_ver_libro', 'id_usuario')  # Asegúrate de que readonly_fields sea una lista o tupla
+    list_per_page = 5
 
 
 admin.site.register(Ver_Libros, AdministrarVer_Libros)

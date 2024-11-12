@@ -78,20 +78,14 @@ class Categorias(models.Model):
     def _str_(self):
         return self.nombre
 
-
 class Libros_Categorias(models.Model):
-    id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
-    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="Libros: ")
-    id_libro_categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE, verbose_name="ID:")
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
-
-    class Meta:
-        verbose_name = "Libros Categoría"
-        verbose_name_plural = "Libros Categorías"
-        ordering = ["-created"]
+    id_libro_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)
+    id_libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="Libros: ")
+    id_categoria = models.ForeignKey('Categorias', on_delete=models.CASCADE, verbose_name="ID:")
+    created = models.DateTimeField(auto_now_add=True)
 
     def _str_(self):
-        return str(self.id_categoria)
+        return str(self.id_libro_categoria)
 
 class Descargas(models.Model):
     id_descarga = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
@@ -110,12 +104,12 @@ class Descargas(models.Model):
 
 
 class Ver_Libros(models.Model):
-    id_ver_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
-    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
-    id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
+    id_ver_libro = models.AutoField(verbose_name="ID: ", primary_key=True)
+    id_libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="ID_Libro: ")
+    id_usuario = models.ForeignKey('Usuarios', on_delete=models.CASCADE, verbose_name="ID_Usuario")
     fecha = models.DateField(auto_now_add=True)
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
-
+    created = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
         verbose_name = "Ver Libro"
         verbose_name_plural = "Ver Libros"
