@@ -20,7 +20,7 @@ class Libros(models.Model):
 
 
 class Grupos (models.Model):
-    id_grupo = models.IntegerField(max_length=10000, verbose_name="ID", primary_key=True)
+    id_grupo = models.IntegerField( verbose_name="ID", primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name="Nombre del grupo")
     privilegios = models.CharField(max_length=100, verbose_name="Privilegios")
     created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
@@ -53,10 +53,10 @@ class Usuarios(models.Model):
         return self.nombre
 
 class Reseñas(models.Model):
-    id_reseña = models.IntegerField(max_length=10000, verbose_name="ID: ", primary_key=True)
-    calificacion = models.IntegerField(max_length=1000, verbose_name="Calificación: ")
+    id_reseña = models.IntegerField( verbose_name="ID: ", primary_key=True)
+    calificacion = models.IntegerField(verbose_name="Calificación: ")
     comentario = models.TextField(verbose_name="Comentario: ")
-
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
     class Meta:
         verbose_name = "Reseña"
         verbose_name_plural = "Reseñas"

@@ -1,3 +1,5 @@
+   <!-- Jazzani :D-->
+
 {% extends "inicio/encabezado.html" %}{%block titulo%}Inicio{%endblock%}
 {% block contenido %}
 {%load static%}
@@ -6,28 +8,11 @@
     <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Bienvenidos a la Biblioteca</h1>
-                <p>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">LIBRO 1</h5>
-                <p class="text-center"><a class="btn btn-success">Ver</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">LIBRO 2</h2>
-                <p class="text-center"><a class="btn btn-success">Ver</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">LIBRO 3</h2>
-                <p class="text-center"><a class="btn btn-success">Ver</a></p>
+                <h1 class="h1">Bienvenidos a la Biblioteca <strong>BIEN</strong></h1>
+                <p> Te damos la bienvenida a nuestra biblioteca virtual.
+         Asombrate con nuestro <strong>TOP 3</strong> de libros mejores valorados.</p>
+                  
+             
             </div>
         </div>
     </section>
@@ -37,20 +22,11 @@
     <!-- Start Featured Product -->
     <section class="bg-light">
         <div class="container py-5">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Biblioteca Diseño Base</h1>
-                    <p>
-                        Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident.
-                    </p>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                            <img src="{% static 'inicio/img/fisicacuantica.png'%}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
@@ -58,10 +34,10 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$240.00</li>
+                                
                             </ul>
                             <a href="shop-single.html" class="h2 text-decoration-none text-dark">Fisica Cuantica</a>
                             <p class="card-text">
@@ -74,7 +50,7 @@
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_02.jpg" class="card-img-top" alt="...">
+                            <img src="{% static 'inicio/img/diccionario.png'%}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
@@ -82,10 +58,10 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$480.00</li>
+                                
                             </ul>
                             <a href="shop-single.html" class="h2 text-decoration-none text-dark">Diccionario Español-Ingles</a>
                             <p class="card-text">
@@ -98,7 +74,7 @@
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
-                            <img src="./assets/img/feature_prod_03.jpg" class="card-img-top" alt="...">
+                            <img src="{% static 'inicio/img/biologia2.png'%}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
@@ -109,9 +85,9 @@
                                     <i class="text-warning fa fa-star"></i>
                                     <i class="text-warning fa fa-star"></i>
                                 </li>
-                                <li class="text-muted text-right">$360.00</li>
+                            
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Biologia Marina</a>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Biologia</a>
                             <p class="card-text">
                                 Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
                             </p>
