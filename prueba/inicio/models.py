@@ -65,7 +65,6 @@ class Reseñas(models.Model):
     def __str__(self):
         return self.comentario
 
-
 class Categorias(models.Model):
     id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
     nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
@@ -76,7 +75,7 @@ class Categorias(models.Model):
         verbose_name_plural = "Categorías"
         ordering = ["-created"]
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre
 
 
@@ -87,13 +86,12 @@ class Libros_Categorias(models.Model):
     created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
     class Meta:
-        verbose_name = "Libros Categorías"
+        verbose_name = "Libros Categoría"
         verbose_name_plural = "Libros Categorías"
         ordering = ["-created"]
 
-    def __str__(self):
-        return str(self.id_categoria)  # Convertir a string para evitar errores
-
+    def _str_(self):
+        return str(self.id_categoria)
 
 class Descargas(models.Model):
     id_descarga = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
@@ -107,7 +105,7 @@ class Descargas(models.Model):
         verbose_name_plural = "Descargas"
         ordering = ["-created"]
 
-    def __str__(self):
+    def _str_(self):
         return str(self.id_descarga)
 
 
@@ -123,7 +121,5 @@ class Ver_Libros(models.Model):
         verbose_name_plural = "Ver Libros"
         ordering = ["-created"]
 
-    def __str__(self):
+    def _str_(self):
         return str(self.id_ver_libro)
-  
-
