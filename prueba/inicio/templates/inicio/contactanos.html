@@ -1,0 +1,67 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}Contactanos{% endblock %}
+{% block contenido %}
+
+{% load static %}
+  <section class="service_section layout_padding">
+    <div class="container">
+      <div class="d-flex flex-column align-items-end">
+        <div class="custom_heading-container">
+          <hr>
+          <h2>Contactanos</h2>
+        </div>
+        <p>¡Síguenos en nuestras redes sociales!</p>
+      </div>
+    </div>
+
+   
+    <div class="container">
+      <div class="d-flex justify-content-around flex-wrap">
+        <a href="">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'inicio/img/insta.png' %}" alt="" class="img-1">
+            </div>
+            <div class="name">
+              <h6>Instagram</h6>
+            </div>
+          </div>
+        </a>
+
+        <a href="">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'inicio/img/face.png' %}" alt="" class="img-1">
+            </div>
+            <div class="name">
+              <h6>Facebook</h6>
+            </div>
+          </div>
+        </a>
+
+        <a href="">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'inicio/img/x.jpg' %}" alt="" class="img-1">
+            </div>
+            <div class="name">
+              <h6>X</h6>
+            </div>
+          </div>
+        </a>
+
+        <a href="">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'inicio/img/whats.png' %}" alt="" class="img-1">
+            </div>
+            <div class="name">
+              <h6>Whatsapp</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

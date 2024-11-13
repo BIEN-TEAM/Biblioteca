@@ -53,6 +53,11 @@
     <!--ESTILOS CSS ERICK-->
     <link rel="stylesheet" href="{% static 'inicio/css_erick/custom.css'%}">
 
+    <!--ESTILOS CSS Axl-->
+    <link rel="stylesheet" href="{% static 'inicio/cssAxl/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'inicio/cssAxl/responsive.css'%}">
+    <link rel="stylesheet" href="{% static 'inicio/cssAxl/style.css'%}">
+
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="{% static 'inicio/css/fontawesome.min.css'%}">
@@ -99,7 +104,7 @@
                             <a class="nav-link" href="contact.html">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contactanos</a>
+                            <a class="nav-link" href="{%url 'Contactanos'%}">Contactanos</a>
                         </li>
                         
                     </ul>
