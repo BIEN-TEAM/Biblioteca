@@ -12,3 +12,9 @@ def nosotros(request):
 
 def contactanos(request):
   return render(request,"inicio/contactanos.html")
+
+def biblioteca(request):
+  return render(request,"inicio/biblioteca.html")
+
+def libro(request):
+    return render(request, 'inicio/libro.html')
