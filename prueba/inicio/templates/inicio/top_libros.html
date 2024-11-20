@@ -1,0 +1,52 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}Top 3{% endblock %}
+{% block contenido %}
+{% load static %}
+
+<!-- Start Categories of The Month -->
+<section class="container py-5">
+    <div class="row text-center pt-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">Bienvenidos a la Biblioteca <strong>BIEN</strong></h1>
+            <p>Te damos la bienvenida a nuestra <strong>Biblioteca Interactiva Electronica Navegable</strong>.
+                Asómbrate con nuestro <strong>TOP 3</strong> de libros mejores valorados.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- End Categories of The Month -->
+
+<!-- Start Featured Products -->
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="row">
+            {% for libro in libros %}
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card h-100">
+                        <a>
+                            <img src="{{ libro.imagen.url }}" class="card-img-top" alt="hola">
+                        </a>
+                    <div class="card-body">
+                        <ul class="list-unstyled d-flex justify-content-between">
+                            <li>
+                                
+                                {% for i in "1"|slice:"libro.promedio:" %}
+                                <i class="text-warning fa fa-star"> Calificación: {{ libro.promedio }}</i>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                        <a href="shop-single.html" class="h2 text-decoration-none text-dark"><strong>{{ libro.nombre }}</strong></a>
+                        <p class="card-text">{{ libro.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+    <div></div>
+</section>
+
+
+
+{% endblock %}

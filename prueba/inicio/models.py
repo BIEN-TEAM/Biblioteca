@@ -1,22 +1,53 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.db.models import Avg
 
-# Apartado Editado por Jazzani
 class Libros(models.Model):
-    id_libro = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField en lugar de IntegerField
-    ISBN = models.CharField(max_length=100, verbose_name="ISBN: ")
-    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
-    autor = models.CharField(max_length=100, verbose_name="Autor: ")
-    año = models.DateField(verbose_name="Año: ")  # Quitar max_length en DateField
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+    id_libro = models.AutoField(verbose_name="ID", primary_key=True)
+    ISBN = models.CharField(max_length=100, verbose_name="ISBN")
+    nombre = models.CharField(max_length=100, verbose_name="Nombre")
+    autor = models.CharField(max_length=100, verbose_name="Autor")
+    año = models.DateField(verbose_name="Año de Publicación")
+    descripcion = models.CharField(max_length=50, verbose_name="Descripcion")
+    imagen = models.ImageField()
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
 
     class Meta:
         verbose_name = "Libro"
         verbose_name_plural = "Libros"
         ordering = ["-created"]
-    
+        indexes = [
+            models.Index(fields=['ISBN']),
+            models.Index(fields=['año']),
+            models.Index(fields=['autor']),
+        ]
+
     def __str__(self):
         return self.nombre
+
+    def promedio_calificacion(self):
+        return self.reseñas.aggregate(Avg('calificacion'))['calificacion__avg']
+
+
+class Reseñas(models.Model):
+    id_reseña = models.AutoField(verbose_name="ID", primary_key=True)
+    libro = models.ForeignKey(Libros, on_delete=models.CASCADE, related_name="reseñas", verbose_name="Libro")
+    calificacion = models.IntegerField(verbose_name="Calificación")
+    comentario = models.TextField(verbose_name="Comentario")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+
+    class Meta:
+        verbose_name = "Reseña"
+        verbose_name_plural = "Reseñas"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return f"Reseña de {self.libro.nombre} - {self.calificacion} estrellas"
+
+    def clean(self):
+        if not 1 <= self.calificacion <= 5:
+            raise ValidationError("La calificación debe estar entre 1 y 5.")
 
 
 class Grupos (models.Model):
@@ -52,18 +83,7 @@ class Usuarios(models.Model):
     def __str__(self):
         return self.nombre
 
-class Reseñas(models.Model):
-    id_reseña = models.IntegerField( verbose_name="ID: ", primary_key=True)
-    calificacion = models.IntegerField(verbose_name="Calificación: ")
-    comentario = models.TextField(verbose_name="Comentario: ")
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
-    class Meta:
-        verbose_name = "Reseña"
-        verbose_name_plural = "Reseñas"
-        ordering = ["-created"]
 
-    def __str__(self):
-        return self.comentario
 
 class Categorias(models.Model):
     id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
