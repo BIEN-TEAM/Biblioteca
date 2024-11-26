@@ -2,6 +2,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Avg
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 
 class Libros(models.Model):
     id_libro = models.AutoField(verbose_name="ID", primary_key=True)
@@ -67,22 +69,49 @@ class Grupos (models.Model):
 
 
 # Apartado Editado por Jazzani
-class Usuarios(models.Model):
-    id_usuario = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
-    id_grupo = models.ForeignKey(Grupos, on_delete=models.CASCADE, verbose_name="Grupo: ")
-    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")  # Quitar la coma
-    email = models.EmailField(max_length=100, verbose_name="Correo electrónico: ")
-    contraseña = models.CharField(max_length=100, verbose_name="Contraseña: ")
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
 
-    class Meta:
-        verbose_name = "Usuario"
-        verbose_name_plural = "Usuarios"
-        ordering = ["-created"]
+
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(email, password, **extra_fields)
+
+class Usuarios(AbstractBaseUser, PermissionsMixin):
+    id_usuario = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    email = models.EmailField(unique=True)
+    nombre = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to='profile_images/', blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nombre', 'apellidos']
 
     def __str__(self):
-        return self.nombre
+        return self.email
 
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
 
 class Categorias(models.Model):

@@ -52,7 +52,10 @@
 
     <!--ESTILOS CSS ERICK-->
     <link rel="stylesheet" href="{% static 'inicio/css_erick/custom.css'%}">
-
+    <link href="{% static 'inicio/css_erick/stylefrom.css'%}" rel="stylesheet" />
+    <link href="{% static 'inicio/css_erick/styleusuario.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!--ESTILOS CSS Axl-->
     <link rel="stylesheet" href="{% static 'inicio/cssAxl/bootstrap.css'%}">
     <link rel="stylesheet" href="{% static 'inicio/cssAxl/responsive.css'%}">
@@ -101,33 +104,26 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{%url 'Biblioteca'%}">Biblioteca</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Perfil</a>
+                            <a class="nav-link" href="{% url 'Perfil Usuario' %}">Perfil</a>
                         </li>
+                  
+                        {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'Contactanos'%}">Contactanos</a>
+                            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                        </li>
+                          
+                        {% endif %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{%url 'Contactanos'%}">Contactanos</a>
                         </li>
                         
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
+                
                   
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-                    </a>
-                </div>
+                   
             </div>
 
         </div>
