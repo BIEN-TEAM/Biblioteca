@@ -31,6 +31,7 @@ urlpatterns = [
     path('editar_perfil/', views.editar_perfil, name='Editar Perfil'),
     path('registro/', views.registro, name='Registro'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('registrar/',views.registrar_comentario,name="Registrar"),
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,6 @@
 {% extends "inicio/encabezado.html" %}
 {% block titulo %}Contactanos{% endblock %}
 {% block contenido %}
-
 {% load static %}
 <section class="service_section layout_padding">
   <div class="container">
@@ -10,58 +9,28 @@
         <hr>
         <h2>Contactanos</h2>
       </div>
-      <p>¡Síguenos en nuestras redes sociales!</p>
+      <p>Dinos tus comentarios y sugerencias</p>
     </div>
   </div>
-
-   
-    <div class="container">
-      <div class="d-flex justify-content-around flex-wrap">
-        <a href="">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'inicio/img/insta.png' %}" alt="" class="img-1">
-            </div>
-            <div class="name">
-              <h6>Instagram</h6>
-            </div>
+  <form class="form-horizontal" action="{% url 'Registrar' %}" method="POST" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container py-5">
+      <div class="row py-5">
+        <div class="mb-3">
+          <input type="text" class="form-control mt-1" id="subject" name="asunto" placeholder="Asunto">
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control mt-1" id="message" name="mensaje" placeholder="Mensaje" rows="8"></textarea>
+        </div>
+        <div class="row">
+          <div class="col text-end mt-2">
+            <button type="submit" class="btn btn-success btn-lg px-3">Enviar</button>
           </div>
-        </a>
-
-        <a href="">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'inicio/img/face.png' %}" alt="" class="img-1">
-            </div>
-            <div class="name">
-              <h6>Facebook</h6>
-            </div>
-          </div>
-        </a>
-
-        <a href="">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'inicio/img/x.jpg' %}" alt="" class="img-1">
-            </div>
-            <div class="name">
-              <h6>X</h6>
-            </div>
-          </div>
-        </a>
-
-        <a href="">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'inicio/img/whats.png' %}" alt="" class="img-1">
-            </div>
-            <div class="name">
-              <h6>Whatsapp</h6>
-            </div>
-          </div>
-        </a>
+        </div>
       </div>
     </div>
-  </section>
+</form>
+
+  
 
 {% endblock %}

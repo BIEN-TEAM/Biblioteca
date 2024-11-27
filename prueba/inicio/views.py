@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from inicio.forms import CustomUserCreationForm
-from .forms import PerfilForm, EditarPerfilForm
+from .forms import PerfilForm, EditarPerfilForm,ComentarioContactoForm
 
 # Create your views here.
 def encabezado(request):
@@ -80,3 +80,12 @@ def editar_perfil(request):
         form = EditarPerfilForm(instance=usuario)
 
     return render(request, 'usuario/editarperfil.html', {'form': form})
+
+def registrar_comentario(request):
+  if request.method == 'POST':
+      form = ComentarioContactoForm(request.POST)
+      if form.is_valid(): 
+            form.save() 
+            return render(request,'inicio/contactanos.html')
+  form = ComentarioContactoForm()
+  return render(request,'inicio/contactanos.html',{'form': form})

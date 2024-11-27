@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inicio.models import Libros, Usuarios, Reseñas, Grupos, Categorias, Libros_Categorias, Descargas,Ver_Libros
+from inicio.models import Libros, Usuarios, Reseñas, Grupos, Categorias, Libros_Categorias, Descargas,Ver_Libros,ComentarioContacto
 
 class AdministrarLibros(admin.ModelAdmin):
     list_display = ('id_libro', 'nombre')
@@ -86,3 +86,11 @@ class AdministrarVer_Libros(admin.ModelAdmin):
 
 
 admin.site.register(Ver_Libros, AdministrarVer_Libros)
+
+class AdministrarComentariosContacto(admin.ModelAdmin):
+    list_display = ('id', 'mensaje')
+    search_fields = ('id','created')
+    date_hierarchy = 'created'
+    readonly_fields = ('created', 'id')
+   
+admin.site.register(ComentarioContacto, AdministrarComentariosContacto)

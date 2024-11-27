@@ -166,3 +166,17 @@ class Ver_Libros(models.Model):
 
     def _str_(self):
         return str(self.id_ver_libro)
+    
+class ComentarioContacto(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="ID")
+    asunto = models.TextField(verbose_name= "asunto")
+    mensaje = models.TextField(verbose_name="comentario")
+    created = models.DateTimeField(auto_now_add=True,verbose_name="Registrado")
+
+    class Meta:
+        verbose_name = "Comentario Contacto"
+        verbose_name_plural = "Comentarios Contactos"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.mensaje
