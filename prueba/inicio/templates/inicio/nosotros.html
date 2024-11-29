@@ -1,0 +1,100 @@
+{% extends "inicio/encabezado.html" %}{%block titulo%}Sobre Nosotros{%endblock%}
+{% block contenido %}
+{%load static%}
+
+<!-- Modal -->
+<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="w-100 pt-1 mb-5 text-right">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <button type="submit" class="input-group-text bg-success text-light">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="col-md-4">
+</div>
+
+
+<section class="bg-succes py-5">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white">
+                <h1>Sobre Nosotros</h1>
+                <p>
+                    En BIEN creemos en el poder de los libros y el conocimiento para transformar
+                    vidas. Nuestra misión es ofrecer un espacio digital accesible y enriquecedor,
+                    donde puedas descubrir lecturas interesantes y aprender algo nuevo cada día.
+                </p>
+                <p>
+                    Nuestra biblioteca digital cuenta con un catálogo diverso que abarca desde 
+                    grandes clásicos hasta novedades actuales, pensado para satisfacer diferentes 
+                    intereses y gustos. Nos motiva la idea de que cualquier persona, en cualquier 
+                    lugar, pueda explorar, aprender y disfrutar de una buena lectura.
+                </p>
+                <p>
+                    En BIEN trabajamos con dedicación para construir una plataforma confiable,
+                    un lugar que realmente inspire a sus usuarios. Nos encanta que
+                    formes parte de esta comunidad.
+                </p>
+            </div>
+            <div class="col-md-4">
+                </div>
+        </div>
+    </div>
+</section>
+<!-- Close Banner -->
+
+<!-- Start Section -->
+<section class="container py-5">
+    <div class="row text-center pt-5 pb-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">Nuestros Servicios</h1>
+            <p>
+                Estos son algunos de los servicios que ofrecemos:
+            </p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h1 text-succes text-center"><i class="fa fa-download"></i></div>
+                <h2 class="h5 mt-4 text-center">Acceso a descargas gratuitas</h2>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h1 text-succes text-center"><i class="fas fa-comments"></i></div>
+                <h2 class="h5 mt-4 text-center">Reseñas y Recomendaciones de Lectura</h2>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h1 text-succes text-center"><i class="fa fa-trophy"></i></div>
+                <h2 class="h5 mt-4 text-center">Top 3 de Libros Más Recomendados</h2>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h1 text-succes text-center"><i class="fa fa-folder"></i></div>
+                <h2 class="h5 mt-4 text-center">Diferentes Géneros</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Section -->
+
+
+ {%endblock%}

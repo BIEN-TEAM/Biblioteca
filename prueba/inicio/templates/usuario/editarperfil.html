@@ -1,0 +1,39 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}Editar Perfil{% endblock %}
+{% block contenido %}
+{% load static %}
+
+<div class="container4">
+    <h2>Editar Perfil</h2>
+    <form id="perfilForm" enctype="multipart/form-data" action="{% url 'Editar Perfil' %}" method="POST">
+        {% csrf_token %}
+        
+        <div class="profile-picture-container3">
+            <img id="profilePicture" src="{% if form.instance.imagen %}{{ form.instance.imagen.url }}{% else %}{% static 'images/default-profile.png' %}{% endif %}" alt="Foto de perfil" class="profile-picture">
+            <input type="file" id="profilePictureInput" name="imagen" accept="image/*" style="display: none;" onchange="previewImage(event)">
+            <button type="button" class="upload-button" onclick="document.getElementById('profilePictureInput').click();">Cambiar Imagen</button>
+        </div>
+        
+        
+        <div class="profile-fields3">
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                {{ form.nombre }}
+            </div>
+            
+            <!-- Correo -->
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Correo:</label>
+                {{ form.email }}
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="button-container">
+            <button type="submit" class="btn btn-success">Confirmar</button>
+            <a href="{% url 'Perfil Usuario' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
