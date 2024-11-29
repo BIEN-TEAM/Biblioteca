@@ -79,56 +79,62 @@
  
 </head>
 
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+  <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'Nosotros' %}">
+          <img src="{% static 'inicio/img/inicio.png' %}" class="card-img-top" alt="hola">
+          BIEN
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="templatemo_main_nav">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Nosotros' %}">Sobre Nosotros</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'top_libros' %}">Top Semanal</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Biblioteca' %}">Biblioteca</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Perfil Usuario' %}">Perfil</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'Contactanos' %}">Contactanos</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="{%url 'Nosotros'%}">
-              <img src="{% static 'inicio/img/inicio.png'%}" class="card-img-top" alt="hola">
-              BIEN
-            </a>
+<style>
+.navbar-nav {
+  flex-direction: row; /* Asegura que los elementos del navbar estén en una sola fila */
+  flex-wrap: nowrap; /* Evita que los elementos se envuelvan en una nueva línea */
+}
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+.nav-item {
+  white-space: nowrap; /* Evita que el texto dentro de los elementos del navbar se envuelva */
+}
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'Nosotros'%}">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'top_libros'%}">Top Semanal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'Biblioteca'%}">Biblioteca</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'Perfil Usuario' %}">Perfil</a>
-                        </li>
-                  
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
-                        </li>
-                          
-                        {% endif %}
-                        <li class="nav-item">
-                          <a class="nav-link" href="{%url 'Contactanos'%}">Contactanos</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                  
-                   
-            </div>
+.collapse.navbar-collapse {
+  justify-content: flex-end; /* Alinea los elementos del navbar a la derecha */
+}
 
-        </div>
-    </nav>
-    <!-- Close Header -->
+.navbar-toggler {
+  margin-left: auto; /* Mueve el botón de colapso al final en pantallas pequeñas */
+}
+</style>
+
 
 
 
