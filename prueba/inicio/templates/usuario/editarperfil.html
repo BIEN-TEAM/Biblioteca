@@ -14,24 +14,21 @@
             <button type="button" class="upload-button" onclick="document.getElementById('profilePictureInput').click();">Cambiar Imagen</button>
         </div>
         
-        
-        <div class="profile-fields3">
-            <!-- Nombre -->
-            <div class="form-group">
-                <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+        <div class="profile-fields3" style="max-width: 400px; margin: 0 auto;">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="{{ form.nombre.id_for_label }}" 
+                style="display: block; font-weight: bold; margin-bottom: 5px;">Nombre:</label>
                 {{ form.nombre }}
             </div>
-            
-            <!-- Correo -->
-            <div class="form-group">
-                <label for="{{ form.email.id_for_label }}">Correo:</label>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="{{ form.email.id_for_label }}" 
+                style="display: block; font-weight: bold; margin-bottom: 5px;">Correo:</label>
                 {{ form.email }}
             </div>
         </div>
 
-        <!-- Botones de acción -->
         <div class="button-container">
-            <button type="submit" class="btn btn-success">Confirmar</button>
+            <button type="submit" class="btn btn-success ">Confirmar</button>
             <a href="{% url 'Perfil Usuario' %}" class="btn btn-danger">Cancelar</a>
         </div>
     </form>

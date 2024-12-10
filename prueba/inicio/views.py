@@ -45,9 +45,9 @@ def registro(request):
         'form': CustomUserCreationForm()
     }
     if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST)
+        formulario = CustomUserCreationForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
-            formulario.save()
+            formulario.save()   
             user = authenticate(email=formulario.cleaned_data["email"], password=formulario.cleaned_data["password1"])
             login(request, user)
             messages.success(request, 'Usuario registrado correctamente')

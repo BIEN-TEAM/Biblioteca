@@ -18,10 +18,9 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model = Usuarios
         fields = ['id_usuario','email', 'nombre', 'imagen']
-
+        
 class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Usuarios
         fields = ['id_usuario','email', 'nombre', 'imagen']
-
-
+       

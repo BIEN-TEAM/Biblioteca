@@ -87,7 +87,7 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class Usuarios(AbstractBaseUser, PermissionsMixin):
-    id_usuario = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    id_usuario = models.AutoField(verbose_name="ID: ", primary_key=True) 
     email = models.EmailField(unique=True)
     nombre = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to='profile_images/', blank=True)
@@ -101,7 +101,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellidos']
+    REQUIRED_FIELDS = ['nombre']
 
     def __str__(self):
         return self.email
