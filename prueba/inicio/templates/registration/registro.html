@@ -1,0 +1,66 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}
+Registrarse
+{% endblock %}
+{% block contenido %}
+{% load static %}
+
+<section class="portfolio_section layout_padding">
+    <div class="container">
+        <div class="custom_heading-container">
+            <div class="container1">
+                <h2>Crear una Cuenta</h2>
+                <a class="nav-link" href="{% url 'login' %}">¿Ya estás registrado? Iniciar Sesión</a>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div>
+                        <label for="id_email">Correo electrónico</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="error">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                
+                    <div>
+                        <label for="id_nombre">Nombre</label>
+                        {{ form.nombre }}
+                        {% if form.nombre.errors %}
+                            <div class="error">{{ form.nombre.errors }}</div>
+                        {% endif %}
+                    </div>
+                
+                    <div>
+                        <label for="id_imagen">Imagen</label>
+                        {{ form.imagen }}
+                        {% if form.imagen.errors %}
+                            <div class="error">{{ form.imagen.errors }}</div>
+                        {% endif %}
+                    </div>
+                
+                    <div>
+                        <label for="id_password1">Contraseña</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                            <div class="error">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                
+                    <div>
+                        <label for="id_password2">Confirmar contraseña</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                            <div class="error">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+                
+                    <button type="submit">Registrar</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
