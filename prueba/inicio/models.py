@@ -13,7 +13,9 @@ class Libros(models.Model):
     año = models.DateField(verbose_name="Año de Publicación")
     descripcion = models.CharField(max_length=50, verbose_name="Descripcion")
     imagen = models.ImageField()
+    archivo = models.FileField(upload_to='libros/archivos/', verbose_name="Archivo", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+
 
     class Meta:
         verbose_name = "Libro"
@@ -126,47 +128,46 @@ class Categorias(models.Model):
 
     def _str_(self):
         return self.nombre
-
 class Libros_Categorias(models.Model):
     id_libro_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)
-    id_libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="Libros: ")
-    id_categoria = models.ForeignKey('Categorias', on_delete=models.CASCADE, verbose_name="ID:")
+    libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="Libros: ")  # Elimina registros relacionados
+    categoria = models.ForeignKey('Categorias', on_delete=models.CASCADE, verbose_name="ID:")
     created = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
+    def __str__(self):
         return str(self.id_libro_categoria)
+
 
 class Descargas(models.Model):
     id_descarga = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
-    id_libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")
-    id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")
+    libro = models.ForeignKey(Libros, on_delete=models.CASCADE, verbose_name="ID_Libro: ")  # Elimina descargas si el libro es eliminado
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, verbose_name="ID_Usuario")  # Elimina si el usuario es eliminado
     fecha = models.DateField(auto_now_add=True, verbose_name="Fecha de descarga: ")
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Descarga"
         verbose_name_plural = "Descargas"
         ordering = ["-created"]
 
-    def _str_(self):
+    def __str__(self):
         return str(self.id_descarga)
 
 
 class Ver_Libros(models.Model):
     id_ver_libro = models.AutoField(verbose_name="ID: ", primary_key=True)
-    id_libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="ID_Libro: ")
-    id_usuario = models.ForeignKey('Usuarios', on_delete=models.CASCADE, verbose_name="ID_Usuario")
+    libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="ID_Libro: ")  # Elimina si el libro es eliminado
+    usuario = models.ForeignKey('Usuarios', on_delete=models.CASCADE, verbose_name="ID_Usuario")  # Elimina si el usuario es eliminado
     fecha = models.DateField(auto_now_add=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         verbose_name = "Ver Libro"
         verbose_name_plural = "Ver Libros"
         ordering = ["-created"]
 
-    def _str_(self):
+    def __str__(self):
         return str(self.id_ver_libro)
-    
 class ComentarioContacto(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="ID")
     asunto = models.TextField(verbose_name= "asunto")

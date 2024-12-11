@@ -155,7 +155,7 @@
       <div class="row">
 
         <div class="col-md-4 pt-5">
-          <h2 class="h2 text-success border-bottom pb-3 border-light logo">Bien</h2>
+          <h2 class="h2 text-success border-bottom pb-3 border-light logo">BIEN</h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li>
               <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -167,26 +167,26 @@
             </li>
             <li>
               <i class="fa fa-envelope fa-fw"></i>
-              <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+              <a class="text-decoration-none" href="bien@company.com">bien@company.com</a>
             </li>
           </ul>
         </div>
 
         <div class="col-md-4 pt-5">
-          <h2 class="h2 text-light border-bottom pb-3 border-light">Productos</h2>
+          <h2 class="h2 text-light border-bottom pb-3 border-light">Apartados de la Página</h2>
           <ul class="list-unstyled text-light footer-link-list">
-            <li><a class="text-decoration-none" href="#">Top Semanal</a></li>
-            <li><a class="text-decoration-none" href="#">Recomendados</a></li>
-            <li><a class="text-decoration-none" href="#">Más leídos</a></li>
+            <li><a class="text-decoration-none" href="{% url 'top_libros' %}">Top Semanal</a></li>
+            <li><a class="text-decoration-none" href="{% url 'Biblioteca' %}">Biblioteca</a></li>
+            <li><a class="text-decoration-none" href="{% url 'login' %}">Iniciar Sesión</a></li>
           </ul>
         </div>
 
         <div class="col-md-4 pt-5">
           <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
           <ul class="list-unstyled text-light footer-link-list">
-            <li><a class="text-decoration-none" href="#">Sobre Nosotros</a></li>
-            <li><a class="text-decoration-none" href="#">Contáctanos</a></li>
-            <li><a class="text-decoration-none" href="#"></a></li>
+            <li><a class="text-decoration-none" href="{% url 'Nosotros' %}">Sobre Nosotros</a></li>
+            <li><a class="text-decoration-none" href="{% url 'Contactanos' %}">Contáctanos</a></li>
+          
           </ul>
         </div>
 
@@ -212,12 +212,6 @@
             </li>
           </ul>
         </div>
-        <div class="col-auto">
-          <label class="sr-only" for="subscribeEmail">Email address</label>
-          <div class="input-group mb-2">
-            <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-            <div class="input-group-text btn-success text-light">Subscribe</div>
-          </div>
         </div>
       </div>
     </div>

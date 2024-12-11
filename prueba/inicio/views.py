@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from inicio.forms import CustomUserCreationForm
 from .forms import PerfilForm, EditarPerfilForm,ComentarioContactoForm
+from django.shortcuts import get_object_or_404
+from django.http import FileResponse, Http404
 
 # Create your views here.
 def encabezado(request):
@@ -39,6 +41,14 @@ def top_3_libros(request):
         libro.estrellas_vacias = 5 - libro.estrellas_completas - libro.estrellas_medias
 
     return render(request, 'inicio/top_libros.html', {'libros': libros})
+
+
+def descargar_archivo(request, id_libro):
+    libro = get_object_or_404(Libros, id_libro=id_libro)
+    if not libro.archivo:
+        raise Http404("El archivo no está disponible")
+    response = FileResponse(libro.archivo.open('rb'), as_attachment=True, filename=libro.archivo.name)
+    return response
 
 def registro(request):
     data = {

@@ -32,6 +32,7 @@ urlpatterns = [
     path('registro/', views.registro, name='Registro'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('registrar/',views.registrar_comentario,name="Registrar"),
+    path('descargar/<int:id_libro>/', views.descargar_archivo, name='descargar_archivo'),
 ]
 
 if settings.DEBUG:
