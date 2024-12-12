@@ -17,6 +17,7 @@ def encabezado(request):
 def nosotros(request):
   return render(request,"inicio/nosotros.html")
 
+
 def contactanos(request):
   return render(request,"inicio/contactanos.html")
 

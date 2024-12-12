@@ -12,10 +12,12 @@
       <p>Dinos tus comentarios y sugerencias</p>
     </div>
   </div>
+
   <form class="form-horizontal" action="{% url 'Registrar' %}" method="POST" role="form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container py-5">
       <div class="row py-5">
+        {% if user.is_authenticated %}
         <div class="mb-3">
           <input type="text" class="form-control mt-1" id="subject" name="asunto" placeholder="Asunto">
         </div>
@@ -27,10 +29,16 @@
             <button type="submit" class="btn btn-success btn-lg px-3">Enviar</button>
           </div>
         </div>
+        {% else %}
+        <div class="row">
+          <div class="col">
+            <h2>¿No tienes cuenta?</h2>
+            <a class="nav-link" href="{% url 'login' %}">Regístrate aquí</a>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
-</form>
+  </form>
 </section>
-  
-
 {% endblock %}
