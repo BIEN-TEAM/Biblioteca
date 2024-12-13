@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Avg
-from .models import Libros, Usuarios , Reseñas
+from .models import Libros, Usuarios , Reseñas, ComentarioContacto
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -122,6 +122,19 @@ def registrar_comentario(request):
             return render(request,'inicio/contactanos.html')
   form = ComentarioContactoForm()
   return render(request,'inicio/contactanos.html',{'form': form})
+
+
+# views.py
+from django.shortcuts import render
+
+
+def comentarios_view(request):
+    # Obtener todos los comentarios
+    comentarios = ComentarioContacto.objects.all().order_by('-created')
+    
+    # Pasar los comentarios al template
+    return render(request, 'inicio/tabla.html', {'comentarios': comentarios})
+
 
 def descargar_pdf(request, id):
     libro = get_object_or_404(Libros, id_libro=id)
