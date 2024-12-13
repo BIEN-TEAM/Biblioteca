@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-chv6rf$l7kol-i9d5^8czf9$2l&!9egv=uydbm@qn^h)o@1tox
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -132,4 +132,4 @@ MEDIA_URL = '/media/'
 #MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # settings.py
-LOGIN_URL = 'login'  # Este es el nombre de la URL de login en tu archivo urls.py
+LOGIN_URL = 'login'  

@@ -9,6 +9,8 @@ from inicio.forms import CustomUserCreationForm
 from .forms import PerfilForm, EditarPerfilForm,ComentarioContactoForm
 from django.shortcuts import get_object_or_404
 from django.http import FileResponse, Http404
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # Create your views here.
 def encabezado(request):
@@ -27,6 +29,9 @@ def biblioteca(request):
 def libro(request):
     return render(request, 'inicio/libro.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 def top_3_libros(request):
     libros = Libros.objects.annotate(promedio=Avg('reseñas__calificacion')).order_by('-promedio')[:3]

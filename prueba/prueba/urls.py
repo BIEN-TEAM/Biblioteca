@@ -18,8 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from inicio import views
 from django.conf import settings
+from inicio.views import logout_view
 from django.conf.urls.static import static
-from django.contrib.auth.views import LogoutView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('nosotros/', views.nosotros, name ="Nosotros"),
@@ -33,7 +34,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('registrar/',views.registrar_comentario,name="Registrar"),
     path('descargar/<int:id_libro>/', views.descargar_archivo, name='descargar_archivo'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', logout_view, name='logout'),
 ]
 
 if settings.DEBUG:
