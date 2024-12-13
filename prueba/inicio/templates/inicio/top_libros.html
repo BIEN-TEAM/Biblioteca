@@ -23,16 +23,15 @@
             {% for libro in libros %}
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
-                        <a>
-                            <img src="{{ libro.imagen.url }}" class="card-img-top" alt="hola">
+                    <a>
+                        <a href="{% url 'libro_detallebd' libro.id_libro %}">
+                        <img src="{{ libro.imagen.url }}" class="card-img-top" alt="imagen libro">
                         </a>
+                    </a>
                     <div class="card-body">
                         <ul class="list-unstyled d-flex justify-content-between">
                             <li>
-                                
-                                {% for i in "1"|slice:"libro.promedio:" %}
                                 <i class="text-warning fa fa-star"> Calificación: {{ libro.promedio }}</i>
-                                {% endfor %}
                             </li>
                         </ul>
                         <a href="shop-single.html" class="h2 text-decoration-none text-dark"><strong>{{ libro.nombre }}</strong></a>
@@ -42,11 +41,7 @@
             </div>
             {% endfor %}
         </div>
-        
     </div>
-    <div></div>
 </section>
-
-
 
 {% endblock %}

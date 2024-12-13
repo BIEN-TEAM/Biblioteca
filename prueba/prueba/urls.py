@@ -23,19 +23,19 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('nosotros/', views.nosotros, name ="Nosotros"),
+    path('nosotros/', views.nosotros, name="Nosotros"),
     path('contactanos/', views.contactanos, name="Contactanos"),
     path('biblioteca/', views.biblioteca, name="Biblioteca"),
-    path('libro/', views.libro, name='Libros'),
+    path('libro/<int:id_libro>/', views.libro_detallebd, name='libro_detallebd'),
     path('', views.top_3_libros, name='top_libros'),
     path('perfilusuario/', views.perfilusuario, name='Perfil Usuario'),
     path('editar_perfil/', views.editar_perfil, name='Editar Perfil'),
     path('registro/', views.registro, name='Registro'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('registrar/',views.registrar_comentario,name="Registrar"),
-    path('logout/', logout_view, name='logout'),
+    path('registrar/', views.registrar_comentario, name="Registrar"),
+    path('logout/', views.logout_view, name='logout'),
     path('descargar_pdf/<int:id>/', views.descargar_pdf, name='descargar_pdf'),
-    path('libro/<int:libro_id>/', views.libroCat, name='libro_cat'),  # Aquí conectamos la vista a una URL
+    path('libro/<int:libro_id>/', views.libroCat, name='libro_cat'),
 ]
 
 if settings.DEBUG:

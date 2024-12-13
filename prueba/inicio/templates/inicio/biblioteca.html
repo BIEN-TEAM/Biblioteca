@@ -7,7 +7,11 @@
     .card {
         background-color: #baa59a;
     }
-    
+    .book-image {
+        width: 100%;
+        height: 500px; 
+        object-fit: cover;
+    }
 </style>
 
 <!-- Start Search and Filter -->
@@ -40,144 +44,22 @@
 <section class="bg-light">
     <div class="container py-5">
         <div class="row">
+            {% for libro in libros %}
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
-                    <a href="{% url 'Libros' %}">
-                        <img src="{% static 'inicio/img/fisicacuantica.png' %}" class="card-img-top" alt="Fisica Cuantica">
+                    <a href="{% url 'libro_detallebd' libro.id_libro %}">
+                        <img src="{{ libro.imagen.url }}" class="card-img-top book-image" alt="{{ libro.nombre }}">
                     </a>
                     <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Fisica Cuantica</a>
+                        <a href="{% url 'libro_detallebd' libro.id_libro %}" class="h2 text-decoration-none text-dark">{{ libro.nombre }}</a>
                         <p class="card-text">
-                            Explora el mundo de la física cuántica con este fascinante libro.
+                            {{ libro.descripcion }}
                         </p>
-                        <p class="text-muted">Reseñas (24)</p>
+                        <p class="text-muted">Reseñas ({{ libro.reseñas.count }})</p>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100">
-                    <a href="shop-single.html">
-                        <img src="{% static 'inicio/img/diccionario.png' %}" class="card-img-top" alt="Diccionario Español-Ingles">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Diccionario Español-Ingles</a>
-                        <p class="card-text">
-                            Un recurso esencial para aprender y mejorar tu inglés.
-                        </p>
-                        <p class="text-muted">Reseñas (48)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100">
-                    <a href="shop-single.html">
-                        <img src="{% static 'inicio/img/biologia2.png' %}" class="card-img-top" alt="Biologia">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Biología</a>
-                        <p class="card-text">
-                            Un viaje a través de los secretos de la biología.
-                        </p>
-                        <p class="text-muted">Reseñas (74)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100">
-                    <a href="shop-single.html">
-                        <img src="{% static 'inicio/img/Bluelock.png' %}" class="card-img-top" alt="Biologia">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Bluelock Tomo 4</a>
-                        <p class="card-text">
-                            Dejate llevar con esta increible historia que combina ciencia ficcion con futbol
-                        </p>
-                        <p class="text-muted">Reseñas (24)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100">
-                    <a href="shop-single.html">
-                        <img src="{% static 'inicio/img/BosqueOscuro.jpg' %}" class="card-img-top" alt="Biologia">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Teoria del bosque oscuro</a>
-                        <p class="card-text">
-                            Adentrate a la teoria del universo, ¿Realmente estamos solos en el universo?.
-                        </p>
-                        <p class="text-muted">Reseñas (48)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100">
-                    <a href="shop-single.html">
-                        <img src="{% static 'inicio/img/48leyes.png' %}" class="card-img-top" alt="Biología">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Las 48 Leyes del Poder</a>
-                        <p class="card-text">
-                            Psicología Oscura, aprende los trucos de la manipulación con las 48 leyes del poder. 
-                        </p>
-                        <p class="text-muted">Reseñas (24)</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

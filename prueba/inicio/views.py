@@ -25,7 +25,8 @@ def contactanos(request):
   return render(request,"inicio/contactanos.html")
 
 def biblioteca(request):
-  return render(request,"inicio/biblioteca.html")
+    libros = Libros.objects.all()
+    return render(request, 'inicio/biblioteca.html', {'libros': libros})
 
 def libro(request):
     libro = get_object_or_404(Libros, id_libro=12)  # Ejemplo para obtener el libro con ID 12
@@ -113,3 +114,14 @@ def libroCat(request, libro_id):
     print(f"Categorias del libro: {categorias}")  # Agrega esta línea para depurar
     
     return render(request, 'inicio/libro.html', {'libro': libro, 'categorias': categorias})
+
+def bibliotecasq(request):
+    libros = Libros.objects.all()
+    return render(request, 'inicio/biblioteca.html', {'libros': libros})
+
+def libro_detalle(request):
+  return render(request,"inicio/libro_detalle.html")
+
+def libro_detallebd(request, id_libro):
+    libro = get_object_or_404(Libros, id_libro=id_libro)
+    return render(request, 'inicio/libro_detalle.html', {'libro': libro})
