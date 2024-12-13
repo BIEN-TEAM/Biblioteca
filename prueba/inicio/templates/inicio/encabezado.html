@@ -97,7 +97,7 @@
                   <a class="nav-link" href="{% url 'top_libros' %}">Top Semanal</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'Biblioteca' %}">Biblioteca</a>
+                  <a class="nav-link" href="{% url 'biblioteca' %}">Biblioteca</a>
               </li>
               {% if user.is_authenticated %}
               <li class="nav-item">
@@ -176,7 +176,7 @@
           <h2 class="h2 text-light border-bottom pb-3 border-light">Apartados de la Página</h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li><a class="text-decoration-none" href="{% url 'top_libros' %}">Top Semanal</a></li>
-            <li><a class="text-decoration-none" href="{% url 'Biblioteca' %}">Biblioteca</a></li>
+            <li><a class="text-decoration-none" href="{% url 'biblioteca' %}">Biblioteca</a></li>
             <li><a class="text-decoration-none" href="{% url 'login' %}">Iniciar Sesión</a></li>
           </ul>
         </div>

@@ -68,13 +68,22 @@
                             {% endfor %}
                         </ul>
 
-            
+            {%if user.is_authenticated%}
                             <div class="row pb-3">
                                 <div class="col d-grid">
                                     <a href="{{ libro.archivo.url }}" class="btn btn-success btn-lg">Descargar PDF</a>
                                 </div>
                             </div>
                         </form>
+                        {% else %}
+                        <div class="row">
+                          <div class="col">
+                            <h5>Registrate para poder descargar un libro</h5>
+                            
+                            <a class="nav-link" href="{% url 'login' %}">Regístrate aquí</a>
+                          </div>
+                        </div>
+                        {% endif %}
 
                     </div>
                 </div>

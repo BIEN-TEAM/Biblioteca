@@ -24,9 +24,31 @@ def nosotros(request):
 def contactanos(request):
   return render(request,"inicio/contactanos.html")
 
+from django.shortcuts import render
+from .models import Libros, Categorias
+
 def biblioteca(request):
-    libros = Libros.objects.all()
-    return render(request, 'inicio/biblioteca.html', {'libros': libros})
+    # Obtener parámetros de búsqueda
+    query = request.GET.get('q', '')  # Toma el valor de búsqueda
+    genero = request.GET.get('genero', '')  # Toma el valor del género seleccionado
+    
+    # Filtrar libros
+    libros = Libros.objects.all()  # Todos los libros por defecto
+    if query:
+        libros = libros.filter(nombre__icontains=query)  # Filtrar por nombre del libro
+    if genero:
+        libros = libros.filter(categorias__nombre=genero)  # Filtrar por género
+    
+    # Obtener todos los géneros para el filtro
+    generos = Categorias.objects.all()
+
+    # Renderizar la plantilla
+    return render(request, 'inicio/biblioteca.html', {
+        'libros': libros,
+        'generos': generos,
+        'query': query,
+        'genero_seleccionado': genero,
+    })
 
 def libro(request):
     libro = get_object_or_404(Libros, id_libro=12)  # Ejemplo para obtener el libro con ID 12
