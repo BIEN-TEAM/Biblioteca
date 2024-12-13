@@ -5,6 +5,19 @@ from django.db.models import Avg
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
+class Categorias(models.Model):
+    id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
+    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
+    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
+
+    class Meta:
+        verbose_name = "Categoría"
+        verbose_name_plural = "Categorías"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.nombre
+
 class Libros(models.Model):
     id_libro = models.AutoField(verbose_name="ID", primary_key=True)
     ISBN = models.CharField(max_length=100, verbose_name="ISBN")
@@ -12,6 +25,7 @@ class Libros(models.Model):
     autor = models.CharField(max_length=100, verbose_name="Autor")
     año = models.DateField(verbose_name="Año de Publicación")
     descripcion = models.CharField(max_length=50, verbose_name="Descripcion")
+    categorias = models.ManyToManyField(Categorias, through='Libros_Categorias')
     imagen = models.ImageField()
     archivo = models.FileField(upload_to='libros/archivos/', verbose_name="Archivo", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
@@ -114,28 +128,14 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return True
-
-
-class Categorias(models.Model):
-    id_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)  # Usar AutoField
-    nombre = models.CharField(max_length=100, verbose_name="Nombre: ")
-    created = models.DateTimeField(auto_now_add=True)  # Agregar campo created
-
-    class Meta:
-        verbose_name = "Categoría"
-        verbose_name_plural = "Categorías"
-        ordering = ["-created"]
-
-    def _str_(self):
-        return self.nombre
+    
 class Libros_Categorias(models.Model):
-    id_libro_categoria = models.AutoField(verbose_name="ID: ", primary_key=True)
-    libro = models.ForeignKey('Libros', on_delete=models.CASCADE, verbose_name="Libros: ")  # Elimina registros relacionados
-    categoria = models.ForeignKey('Categorias', on_delete=models.CASCADE, verbose_name="ID:")
+    libro = models.ForeignKey(Libros, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.id_libro_categoria)
+        return str(self.categoria)
 
 
 class Descargas(models.Model):

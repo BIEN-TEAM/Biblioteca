@@ -50,14 +50,6 @@ def top_3_libros(request):
 
     return render(request, 'inicio/top_libros.html', {'libros': libros})
 
-
-def descargar_archivo(request, id_libro):
-    libro = get_object_or_404(Libros, id_libro=id_libro)
-    if not libro.archivo:
-        raise Http404("El archivo no está disponible")
-    response = FileResponse(libro.archivo.open('rb'), as_attachment=True, filename=libro.archivo.name)
-    return response
-
 def registro(request):
     data = {
         'form': CustomUserCreationForm()
@@ -114,4 +106,10 @@ def descargar_pdf(request, id):
     response['Content-Disposition'] = f'attachment; filename="{libro.pdf.name}"'
     return response
 
+def libroCat(request, libro_id):
+    libro = get_object_or_404(Libros, id_libro=libro_id)
+    categorias = libro.categorias.all()
     
+    print(f"Categorias del libro: {categorias}")  # Agrega esta línea para depurar
+    
+    return render(request, 'inicio/libro.html', {'libro': libro, 'categorias': categorias})

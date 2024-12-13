@@ -65,8 +65,11 @@
 
                         <h6>Categorias:</h6>
                         <ul class="list-unstyled pb-3">
-                            <li>{{Libros_Categorias.id_libros_categoria}}</li>
-                            <li>Fisica</li>
+                            {% for categoria in categorias %}
+                                <li>{{ categoria.nombre }}</li>
+                            {% empty %}
+                                <li>No hay categorías asignadas</li>
+                            {% endfor %}
                         </ul>
 
             

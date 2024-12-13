@@ -35,6 +35,7 @@ urlpatterns = [
     path('registrar/',views.registrar_comentario,name="Registrar"),
     path('logout/', logout_view, name='logout'),
     path('descargar_pdf/<int:id>/', views.descargar_pdf, name='descargar_pdf'),
+    path('libro/<int:libro_id>/', views.libroCat, name='libro_cat'),  # Aquí conectamos la vista a una URL
 ]
 
 if settings.DEBUG:

@@ -55,12 +55,11 @@ class AdministrarLibrosCategoria(admin.ModelAdmin):
 from .models import Libros_Categorias
 
 class AdministrarLibros_Categorias(admin.ModelAdmin):
-    list_display = ('id_libro_categoria', 'libro', 'categoria')
-    search_fields = ('id_libro_categoria', 'id_libro__nombre', 'id_categoria__nombre')
+    list_display = ('libro', 'categoria')
+    search_fields = ('libro', 'categoria')
     date_hierarchy = 'created'
-    readonly_fields = ('created', 'id_libro_categoria')
     list_per_page = 5
-    list_display_links = ('id_libro_categoria', 'libro', 'categoria')
+    list_display_links = ('libro', 'categoria')
 
 admin.site.register(Libros_Categorias, AdministrarLibros_Categorias)
 
