@@ -36,6 +36,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('descargar_pdf/<int:id>/', views.descargar_pdf, name='descargar_pdf'),
     path('libro/<int:libro_id>/', views.libroCat, name='libro_cat'),
+    path('libro/<int:libro_id>/reseña/', views.registrar_reseña, name='registrar_reseña'),
+    path('libro/<int:libro_id>/', views.libro_detalle, name='libro_detalle'),
 ]
 
 if settings.DEBUG:

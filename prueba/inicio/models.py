@@ -30,7 +30,6 @@ class Libros(models.Model):
     archivo = models.FileField(upload_to='libros/archivos/', verbose_name="Archivo", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
 
-
     class Meta:
         verbose_name = "Libro"
         verbose_name_plural = "Libros"
@@ -45,29 +44,8 @@ class Libros(models.Model):
         return self.nombre
 
     def promedio_calificacion(self):
+        # Esta función calcula el promedio de la calificación de todas las reseñas asociadas al libro
         return self.reseñas.aggregate(Avg('calificacion'))['calificacion__avg']
-
-
-class Reseñas(models.Model):
-    id_reseña = models.AutoField(verbose_name="ID", primary_key=True)
-    libro = models.ForeignKey(Libros, on_delete=models.CASCADE, related_name="reseñas", verbose_name="Libro")
-    calificacion = models.IntegerField(verbose_name="Calificación")
-    comentario = models.TextField(verbose_name="Comentario")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
-
-    class Meta:
-        verbose_name = "Reseña"
-        verbose_name_plural = "Reseñas"
-        ordering = ["-created"]
-
-    def __str__(self):
-        return f"Reseña de {self.libro.nombre} - {self.calificacion} estrellas"
-
-    def clean(self):
-        if not 1 <= self.calificacion <= 5:
-            raise ValidationError("La calificación debe estar entre 1 y 5.")
-
-
 class Grupos (models.Model):
     id_grupo = models.IntegerField( verbose_name="ID", primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name="Nombre del grupo")
@@ -129,6 +107,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return True
     
+    
 class Libros_Categorias(models.Model):
     libro = models.ForeignKey(Libros, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
@@ -181,3 +160,24 @@ class ComentarioContacto(models.Model):
 
     def __str__(self):
         return self.mensaje
+    
+
+class Reseñas(models.Model):
+    id_reseña = models.AutoField(verbose_name="ID", primary_key=True)
+    libro = models.ForeignKey(Libros, on_delete=models.CASCADE, related_name="reseñas", verbose_name="Libro")
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name="reseñas", verbose_name="Usuario")  # Campo de usuario
+    calificacion = models.IntegerField(verbose_name="Calificación")
+    comentario = models.TextField(verbose_name="Comentario")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+
+    class Meta:
+        verbose_name = "Reseña"
+        verbose_name_plural = "Reseñas"
+        ordering = ["-created"]
+
+    def clean(self):
+        if not 1 <= self.calificacion <= 5:
+            raise ValidationError("La calificación debe estar entre 1 y 5.")
+
+    def __str__(self):
+        return f"Reseña de {self.libro.nombre} - {self.calificacion} estrellas"

@@ -2,6 +2,15 @@
 {% block titulo %}{{ libro.nombre }}{% endblock %}
 {% block contenido %}
 
+<style>
+    .detail-image {
+        width: 100%;
+        height: 600px; /* Ajusta la altura según tus necesidades */
+        object-fit: cover;
+    }
+</style>
+
+
 <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="w-100 pt-1 mb-5 text-right">
@@ -99,105 +108,52 @@
         <div class="row text-left p-2 pb-3">
             <h4>Reseñas del producto</h4>
         </div>
-
         <!--Start Carousel Wrapper-->
-        <div id="carousel-related-product">
-
-            <div class="p-2 pb-3">
-                <div class="product-wap card rounded-0">
-                    <div class="card rounded-0">
-                        <img class="card-img rounded-0 img-fluid" src="assets/img/shop_08.jpg">
-                    </div>
-                    <div class="card-body">
-                        <a href="shop-single.html" class="h3 text-decoration-none">Zellensxn</a>
-                        <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                            <li>Esta estupendo para el inicio del tema, aborda grandes ejercicios para asi desarrollar el conocimiento facilmente</li>
-                            <li class="pt-2">
-                                <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                            </li>
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-center mb-1">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <p class="text-center mb-0">4.0</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-2 pb-3">
-                <div class="product-wap card rounded-0">
-                    <div class="card rounded-0">
-                        <img class="card-img rounded-0 img-fluid" src="assets/img/shop_09.jpg">
-                    </div>
-                    <div class="card-body">
-                        <a href="shop-single.html" class="h3 text-decoration-none">Jordan168</a>
-                        <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                            <li>Excelente edición, me ayudo mucho para practicar y estudiar aunque siento que falto muchisimos más temas y ejercicios interesantes, para alguien que quiera empezar con la fisica cuantica este libro lo puede llegar a confundir </li>
-                            <li class="pt-2">
-                                <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                            </li>
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-center mb-1">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <p class="text-center mb-0">3.0</p>
+            <div id="carousel-related-product">
+                <div class="p-2 pb-3">
+                    <div class="product-wap card rounded-0">
+                        <div class="card-body">
+                            {% for reseña in libro.reseñas.all %}
+                            <a href="shop-single.html" class="h3 text-decoration-none">{{ reseña.usuario.username }}</a>
+                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                <li>{{ reseña.comentario }}</li>
+                                <li class="pt-2">
+                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                            </ul>
+                                <p class="text-center mb-0"> ({{ reseña.calificacion }} estrellas)</p>
+                                {% empty %}
+                                    <p>No hay reseñas para este libro aún.</p>
+                                {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="p-2 pb-3">
-                <div class="product-wap card rounded-0">
-                    <div class="card rounded-0">
-                        <img class="card-img rounded-0 img-fluid" src="assets/img/shop_10.jpg">
-                    </div>
-                    <div class="card-body">
-                        <a href="shop-single.html" class="h3 text-decoration-none">Chachani</a>
-                        <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                            <li>Me encanto, este es mi tercer libro relacionado con la fisica cuantica y me entretuvieron muchisimo los ejercicios y lecturas de este, creo que actualmente es el mejor que eh leido recomendado</li>
-                            <li class="pt-2">
-                                <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                            </li>
-                        </ul>
-                        <ul class="list-unstyled d-flex justify-content-center mb-1">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <p class="text-center mb-0">5.0</p>
-                    </div>
-                </div>
-            </div>  
         </div>
-
     </div>
+</section>
     <section class="service_section layout_padding">
         <div class="container">
-          <div class="d-flex flex-column align-items-center">
-            <div class="custom_heading-container">
-              <hr>
-              <h2>Reseña</h2>
+            <div class="d-flex flex-column align-items-center">
+                <div class="custom_heading-container">
+                    <hr>
+                    {% if user.is_authenticated %}
+                    <h2>Reseña</h2>
+                </div>
+                <p>Déjanos tu reseña de lo que te pareció este libro</p>
             </div>
-            <p>Dejanos tu reseña de lo que te parecio este libro</p>
-          </div>
         </div>
-        <form class="form-horizontal" action="{% url 'Registrar' %}" method="POST" role="form" enctype="multipart/form-data">
+        <form class="form-horizontal" action="{% url 'registrar_reseña' libro.id_libro %}" method="POST" role="form">
             {% csrf_token %}
+                    
             <div class="container py-5">
                 <div class="row py-5">
                     <div class="mb-3">
@@ -219,23 +175,17 @@
                             <button type="submit" class="btn btn-success btn-lg px-3">Enviar</button>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col">
+                                <h2>Para compartir tu opinión</h2>
+                                <a class="nav-link" href="{% url 'login' %}">Regístrate aquí</a>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </form>
     </section>
-</section>    
 <!-- End Article -->
-
-
-
-
-<style>
-    .detail-image {
-        width: 100%;
-        height: 600px; /* Ajusta la altura según tus necesidades */
-        object-fit: cover;
-    }
-</style>
-
-
 {% endblock %}

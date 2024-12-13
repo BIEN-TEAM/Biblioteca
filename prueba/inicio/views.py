@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Avg
-from .models import Libros, Usuarios
+from .models import Libros, Usuarios , Reseñas
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -147,3 +147,23 @@ def libro_detalle(request):
 def libro_detallebd(request, id_libro):
     libro = get_object_or_404(Libros, id_libro=id_libro)
     return render(request, 'inicio/libro_detalle.html', {'libro': libro})
+
+
+def registrar_reseña(request, libro_id):
+    libro = get_object_or_404(Libros, id_libro=libro_id)
+    
+    if request.method == 'POST':
+        calificacion = request.POST.get('calificacion')
+        comentario = request.POST.get('comentario')
+
+        reseña = Reseñas(
+            libro=libro,
+            usuario=request.user,
+            calificacion=calificacion,
+            comentario=comentario
+        )
+        reseña.save()
+        
+        return redirect('libro_detalle', libro_id=libro.id_libro)  
+
+    return render(request, 'libro_detalle.html', {'libro': libro})
