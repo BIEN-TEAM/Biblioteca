@@ -1,0 +1,65 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}Biblioteca{% endblock %}
+{% block contenido %}
+{% load static %}
+
+<style>
+    .card {
+        background-color: #baa59a;
+    }
+    .book-image {
+        width: 100%;
+        height: 500px; /* Ajustado para que las imágenes no sean tan grandes */
+        object-fit: cover;
+    }
+</style>
+
+<section class="container text-center py-4">
+    <h1 class="h1">Biblioteca Digital</h1>
+    <p>Explora y busca libros en nuestra biblioteca.</p>
+
+    <form method="get" action="{% url 'biblioteca' %}" class="d-flex justify-content-center">
+      
+        <input type="text" name="q" class="form-control me-2" placeholder="Buscar libros..." value="{{ query|default:'' }}">
+        
+        <select name="genero" class="form-select me-2">
+            <option value="">Todos los géneros</option>
+            {% for genero in generos %}
+                <option value="{{ genero.nombre }}" {% if genero.nombre == genero_seleccionado %}selected{% endif %}>{{ genero.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</section>
+
+<section class="container py-4">
+    {% if libros %}
+        <div class="row">
+            {% for libro in libros %}
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="{% url 'libro_detallebd' libro.id_libro %}">
+                        <img src="{{ libro.imagen.url }}" class="card-img-top book-image" alt="{{ libro.nombre }}">
+                    </a>
+                    <div class="card-body">
+                        <h2 class="h5">
+                            <a href="{% url 'libro_detallebd' libro.id_libro %}" class="text-decoration-none text-dark">
+                                {{ libro.nombre }}
+                            </a>
+                        </h2>
+                        <p class="card-text">{{ libro.descripcion }}</p>
+                        <p class="text-muted">Reseñas ({{ libro.reseñas.count }})</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-4">
+            <h3 class="text">No se encontraron libros para la búsqueda o categoría seleccionada.</h3>
+        </div>
+    {% endif %}
+</section>
+
+{% endblock %}

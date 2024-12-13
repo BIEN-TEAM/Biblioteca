@@ -1,0 +1,8 @@
+.text-succes { color: #baa59a !important;}
+
+.bg-succes { background-color: #baa59a !important;}
+/* Agregar espacio dentro del div vacío */
+.col-md-4 {
+    padding: 25px; /* Ajusta este valor para el espacio que desees */
+  }
+  

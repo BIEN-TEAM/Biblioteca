@@ -1,0 +1,30 @@
+{% extends "inicio/encabezado.html" %}
+{% block titulo %}Perfil{% endblock %}
+{% block contenido %}
+<div class="container4">
+  <h2>Perfil</h2>
+  
+  <!-- Contenedor de imagen de perfil -->
+  <div class="profile-picture-container3">
+    {% if usuario.imagen %}
+      <img id="profilePicture" src="{{ usuario.imagen.url }}" alt="Foto de perfil" class="profile-picture">
+    {% else %}
+      <div class="default-profile">
+        <p>Foto de perfil</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Información del perfil -->
+  <div class="profile-fields3">
+    <p><strong>Nombre:</strong> {{ usuario.nombre }}</p> 
+    <p><strong>Correo:</strong> {{ usuario.email }}</p>
+  </div>
+
+  <!-- Botones -->
+  <div class="button-container">
+    <a href="{% url 'Editar Perfil' %}" class="btn btn-success">Editar Perfil</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar sesión</a>
+  </div>
+</div>
+{% endblock %}
