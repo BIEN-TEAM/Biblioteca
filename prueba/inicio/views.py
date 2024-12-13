@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.http import FileResponse, Http404
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+import os
 
 # Create your views here.
 def encabezado(request):
@@ -27,7 +28,8 @@ def biblioteca(request):
   return render(request,"inicio/biblioteca.html")
 
 def libro(request):
-    return render(request, 'inicio/libro.html')
+    libro = get_object_or_404(Libros, id_libro=12)  # Ejemplo para obtener el libro con ID 12
+    return render(request, 'inicio/libro.html', {'libro': libro})
 
 def logout_view(request):
     logout(request)
@@ -105,3 +107,11 @@ def registrar_comentario(request):
             return render(request,'inicio/contactanos.html')
   form = ComentarioContactoForm()
   return render(request,'inicio/contactanos.html',{'form': form})
+
+def descargar_pdf(request, id):
+    libro = get_object_or_404(Libros, id_libro=id)
+    response = FileResponse(libro.pdf.open(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{libro.pdf.name}"'
+    return response
+
+    

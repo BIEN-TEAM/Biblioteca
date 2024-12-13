@@ -26,101 +26,54 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="{% static 'inicio/img/fisicacuantica.png' %}" alt="Card image cap" id="product-detail">
-                </div>
-                <div class="row">
-                    <!--Start Controls-->
-                    <div class="col-1 align-self-center">
-                        <a href="#multi-item-example" role="button" data-bs-slide="prev">
-                            <i class="text-dark fas fa-chevron-left"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </div>
-                    <!--End Controls-->
-                    <!--Start Carousel Wrapper-->
-                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-                        <!--Start Slides-->
-                        <div class="carousel-inner product-links-wap" role="listbox">
-
-                            <!--First slide-->
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="{% static 'inicio/img/fisicacuantica.png' %}" alt="Product Image 1">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="{% static 'inicio/img/fisicacuantica.png' %}" alt="Product Image 2">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="{% static 'inicio/img/Bluelock.png' %}" alt="Product Image 3">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/.First slide-->
-                        </div>
-                        <!--End Slides-->
-                    </div>
-                    <!--End Carousel Wrapper-->
-                    <!--Start Controls-->
-                    <div class="col-1 align-self-center">
-                        <a href="#multi-item-example" role="button" data-bs-slide="next">
-                            <i class="text-dark fas fa-chevron-right"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <!--End Controls-->
+                    <img class="card-img img-fluid" src="{{ libro.imagen.url }}" alt="Card image cap" id="product-detail">
                 </div>
             </div>
             <!-- col end -->
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="h2">Física Cuantica</h1>
-                        <p class="h3 py-2">350 paginas</p>
+                        <h1 class="h2">{{ libro.nombre }}</h1>
+                        <p class="h3 py-2">75 paginas</p>
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-secondary"></i>
-                            <span class="list-inline-item text-dark">Rating 4.4 | 4 Reseñas</span>
+                            <span class="list-inline-item text-dark">{{ libro.promedio }}</span>
                         </p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6>Autor:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>Baldor</strong></p>
+                                <p class="text-muted"><strong>{{libro.autor}}</strong></p>
                             </li>
                         </ul>
 
                         <h6>Description:</h6>
-                        <p>"Introducción a la Física Cuántica" es una obra fundamental para cualquier persona interesada en entender los principios que gobiernan el mundo subatómico. Este libro ofrece una explicación detallada y accesible de los conceptos clave de la física cuántica, desde los experimentos históricos que dieron origen a la teoría hasta las aplicaciones modernas en tecnología y ciencia.</p>
+                        <p>{{ libro.descripcion }}</p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6>Fecha de salida :</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>21/02/2010</strong></p>
+                                <p class="text-muted"><strong>{{libro.año}}</strong></p>
                             </li>
                         </ul>
 
                         <h6>Categorias:</h6>
                         <ul class="list-unstyled pb-3">
-                            <li>Educación</li>
+                            <li>{{Libros_Categorias.id_libros_categoria}}</li>
                             <li>Fisica</li>
                         </ul>
 
             
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <a href="#">Descargar</a>
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard" a href="{% url 'descargar_pdf' libro.id_libro %}">Descargar</button>
+                                    
                                 </div>
                                 <div class="col d-grid">
                                     <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Like</button>
